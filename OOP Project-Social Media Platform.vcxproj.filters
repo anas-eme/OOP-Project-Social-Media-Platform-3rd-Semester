@@ -23,5 +23,8 @@
     <ClInclude Include="Main_Application_Interface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="User_Manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

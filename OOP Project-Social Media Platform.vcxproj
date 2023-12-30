@@ -140,9 +140,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Main_Application_Interface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main_Application_Interface.h" />
+    <ClInclude Include="Post.h" />
+    <ClInclude Include="Reaction.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="User_Manager.h" />
   </ItemGroup>

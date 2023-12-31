@@ -18,6 +18,10 @@ bool User::validate_Password(string passwrd)
 {
 	return passwrd == password;
 }
+void User::create_profile()
+{
+
+}
 void User::display_Profile()
 {
 

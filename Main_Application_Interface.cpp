@@ -129,6 +129,8 @@ void Main_Application_Interface::sign_Up()
             {
                 //retrive the user account after signup successful
                 current_user = user_manager.get_User(temp_username, temp_password);
+                //function to take rest of the data of the user
+                current_user->create_profile();
                 return;
             }
             //if any case sign-up was unsuccessful continue the loop

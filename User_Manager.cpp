@@ -48,6 +48,7 @@ User* User_Manager::get_User(string u_name, string password)
             return &user;//return the address of the current user according to the username and password
         }
     }
+    return nullptr;
 }
 User_Manager::~User_Manager()
 {

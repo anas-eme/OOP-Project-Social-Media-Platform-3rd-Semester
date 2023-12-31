@@ -86,7 +86,7 @@ void Main_Application_Interface::sign_In()
        if (user_manager.validate_User(temp_username, temp_password))
        {
            //retriver useraccount
-           user_manager.get_User(temp_username, temp_password);
+           current_user = user_manager.get_User(temp_username, temp_password);
            return;//end the function
        }
        else
@@ -117,7 +117,7 @@ void Main_Application_Interface::sign_Up()
         if (c_password != temp_password)
         {
             cout << "\n\tEntered Password Does Not Match!" << endl;
-            cout << "\tSign-In Unsuccessful!" << endl;
+            cout << "\tSign-Up Unsuccessful!" << endl;
             cout << "\tTry Again!\n\t";
             system("pause");
             continue;
@@ -128,13 +128,13 @@ void Main_Application_Interface::sign_Up()
             if (user_manager.create_User(temp_username, temp_password))
             {
                 //retrive the user account after signup successful
-                user_manager.get_User(temp_username, temp_password);
+                current_user = user_manager.get_User(temp_username, temp_password);
                 return;
             }
             //if any case sign-up was unsuccessful continue the loop
             else
             {
-                cout << "\tSign-In Unsuccessful!" << endl;
+                cout << "\tSign-Up Unsuccessful!" << endl;
                 cout << "\tTry Again!\n\t";
                 system("pause");
             }

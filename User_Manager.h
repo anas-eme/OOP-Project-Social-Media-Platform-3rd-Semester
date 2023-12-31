@@ -7,7 +7,7 @@ using namespace std;
 class User_Manager
 {
 private:
-	User users[max_users];//array to store the users
+	User* users = new User[max_users];//allocated array to store the users
 protected:
 public:
 	User_Manager();//constructor

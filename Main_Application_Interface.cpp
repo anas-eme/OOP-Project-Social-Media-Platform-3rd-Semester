@@ -13,9 +13,12 @@ Main_Application_Interface::Main_Application_Interface()
 void Main_Application_Interface::run()
 {
     char choice;//variable for storing the choice of the user
+    //create a default user for sign in illustration
+    user_manager.create_User("anas", "123456");//creates a user
     //main application loop
     do
     {
+        system("cls");
         //call to welcome function
         welcome_Screen();
         //input loop goes here
@@ -37,14 +40,16 @@ void Main_Application_Interface::run()
             else if (choice == '0')//choice to end program
             {
                 cout << "\n\tPROGRAM EXITED!" << endl;
-                return;
+                _getch();
+                exit(0);
             }              
             else//handle invalid input
                 cout << "\tInvalid Choice!" << endl
                 << "\tTry Again!" << endl
                 << "\tEnter Your Choice(1/2): ";
         } while (true);
-        //when sign-in or sign-up is successful display the profile of the user
+        //when sign-in or sign-up is successful then display the profile of the user
+        if (!(current_user == nullptr))
         current_user->display_Profile();//call to the display-profile function
         //from now on rest is handled in the display-profile function
     } while (true);
@@ -73,9 +78,6 @@ void Main_Application_Interface::welcome_Screen()
 }
 void Main_Application_Interface::sign_In()
 {
-    //loop to ensure successful login
-    do
-    {
         system("cls");//clear screen for sign in interface
        cout << "\t*****|Sign-In|*****" << endl
             << "\n\tEnter Your Username: ";
@@ -94,15 +96,12 @@ void Main_Application_Interface::sign_In()
            cout << "\tSign-In Unsuccessful!" << endl;
            cout << "\tTry Again!\n\t";
            system("\tpause");
+           current_user = nullptr;//remove the pointer of the user as login was unsuccessful
        }
-    } while (true);
 }
 void Main_Application_Interface::sign_Up()
 {
     string c_password;//just to store the password to confirm that it matches the previous one
-    //loop to ensure successful sign-up
-    do
-    {
         system("cls");//clear screen for sign up interface
         cout << "\t*****|Sign-Up|*****" << endl
             << "\n\tLet's create an Account for You!" << endl
@@ -120,7 +119,6 @@ void Main_Application_Interface::sign_Up()
             cout << "\tSign-Up Unsuccessful!" << endl;
             cout << "\tTry Again!\n\t";
             system("pause");
-            continue;
         }
         //if password matches run the create-user function
         else
@@ -139,9 +137,9 @@ void Main_Application_Interface::sign_Up()
                 cout << "\tSign-Up Unsuccessful!" << endl;
                 cout << "\tTry Again!\n\t";
                 system("pause");
+                current_user = nullptr;//remove the pointer as due to unsuccessful login
             }
         }
-    } while (true);
 }
 Main_Application_Interface::~Main_Application_Interface()
 {

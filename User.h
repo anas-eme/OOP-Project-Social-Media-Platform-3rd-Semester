@@ -9,6 +9,7 @@ private:
 	string password;//stores the password
 	string name_of_user;//stores the name of the user
 	string date_of_birth;//stores the date of birth of the user
+	string about;//store the about of the user
 protected:
 public:
 	User();//constructor
@@ -20,6 +21,7 @@ public:
 	void update_Profile();//update the user profile
 	void create_Post();//handle creation of a post
 	void display_Posts();//display the posts created by user
+	void sign_out();//sign out the user account
 	void react_to_Post();//handle the likes and comments
-	~User(){}//destructor
+	~User();//destructor
 };

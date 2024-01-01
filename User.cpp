@@ -180,7 +180,7 @@ void User::create_Post()
 	string temp;
 	bool post_created = false;
 	cout << "\n\tLet's create a Post!" << endl
-		<< "\n\tEnter content of the Post and press Enter to Create: \n" << endl
+		<< "\n\tEnter content of the Post and press Enter to Create:" << endl
 		<< "\n\tPost: ";
 	getline(cin, temp, '\n');
 	for (int i = 0; i < max_posts; i++)
@@ -210,7 +210,7 @@ void User::display_Posts()
 			post_created = true;
 	if (post_created)
 	{
-		cout << "\n\tYou Created the Following Posts:";
+		cout << "\n\tYou Created the Following Posts:" << endl;
 		for (int i = 0; i < max_posts && !(posts[i].display().empty()); i++)
 			cout << "\n\tPost" << i + 1 << " :" << endl
 			<< "\t\t" << posts[i].display() << "\n\t";

@@ -1,17 +1,36 @@
 #include"User.h"
+#include"Post.h"
 #include<iostream>
 #include<string>
 #include<conio.h>
 using namespace std;
 User::User()
 {
-
 }
 //constructor to initialize a user to use with signup
 User::User(string u_name, string pass)
 {
 	user_name = u_name;
 	password = pass;
+	rand();//just to initialize some random value
+	//randomize for every user
+	followers = rand() % 500;
+	following = rand() % 50;
+	friends = rand() % 50;
+}
+//constructor to initialize a user to predefined values for the sign in illustration purpose
+User::User(string u_name, string pass, string name, string dob, string ab)
+{
+	user_name = u_name;
+	password = pass;
+	name_of_user = name;
+	date_of_birth = dob;
+	about = ab;
+	rand();//just to initialize some random value
+	//randomize for every user
+	followers = rand() % 500;
+	following = rand() % 50;
+	friends = rand() % 50;
 }
 string User::get_Username()
 {
@@ -24,12 +43,11 @@ bool User::validate_Password(string passwrd)
 void User::create_profile()
 {
 	cout << "\n\tLet's Complete Your Profile!" << endl;
-	cin.ignore(numeric_limits<streamsize>::max(), '\n');  // Clear input buffer
 	cout << "\n\tEnter your Full Name: ";
 	getline(cin, name_of_user, '\n');
 	cout << "\n\tEnter your Date of Birth in (DD/MM/YY) Format: ";
 	getline(cin, date_of_birth, '\n');
-	cout << "\n\tEnter an About of Your's: ";
+	cout << "\n\tEnter a BIO of Your's: ";
 	getline(cin, about, '\n');
 	cout << "\n\tYour Account Created Successfully!" << endl
 		<< "\tPress any key to show your Profile!";
@@ -46,9 +64,9 @@ void User::display_Profile()
 		system("cls");
 		//display the profile menu
 		cout << "\n\t\t" << name_of_user << "'s profile" << endl
-			<< "\n\tFollowers: " << rand() % 500
-			<< "\tFollowing: " << rand() % 200
-			<< "\tFriends: " << rand() % 50
+			<< "\n\tFollowers: " << followers
+			<< "\tFollowing: " << following
+			<< "\tFriends: " << friends
 			<< "\n\tBio: " << about << endl
 			<< "\n\tSelect one of the following:" << endl
 			<< "\tJust Enter the Number!" << endl
@@ -66,18 +84,20 @@ void User::display_Profile()
 			if (choice == '1')
 			{
 				update_Profile();
+				break;
 			}
 			else if (choice == '2')
 			{
 				create_Post();
+				break;
 			}
 			else if (choice == '3')
 			{
 				display_Posts();
+				break;
 			}
 			else if (choice == '4')
 			{
-				sign_out();
 				system("cls");
 				return;
 			}
@@ -95,19 +115,113 @@ void User::display_Profile()
 }
 void User::update_Profile()
 {
-
+	char choice;
+	system("cls");
+	cout << "\n\tSelect one of the following:" << endl
+		<< "\tJust Enter the Number!" << endl
+		<< "\n\t1> Change Password" << endl
+		<< "\t2> Change Bio" << endl;
+	do
+	{
+		//swith choice and run the required function
+		cout << "\n\tEnter your choice: ";
+		choice = _getch();
+		cout << choice << endl;
+		if (choice == '1')
+		{
+			password = change_Password();//call to change password function
+			break;
+		}
+		else if (choice == '2')
+		{
+			cout<<"\n\tEnter New Bio: ";
+			getline(cin,about,'\n');
+			cout << "\n\tBio Updated!\n\t";
+			system("pause");
+			break;
+		}
+		else
+		{
+			cout<<"\tInvalid Choice!"<<endl;
+		}
+	} while (true);
+}
+string User::change_Password()
+{
+	string temp1, temp2;
+	do
+	{
+		cout << "\n\tEnter  Old Password: ";
+		getline(cin, temp1, '\n');
+		if (validate_Password(temp1))
+		{
+			cout << "\n\tEnter Your New Password: ";
+			getline(cin, temp1, '\n');
+			cout << "\tEnter Password Again: ";
+			getline(cin, temp2, '\n');
+			if (temp1 == temp2)
+			{
+				cout << "\n\tPassword Updated!\n\t";
+				system("pause");
+				return temp1;
+			}
+			else
+				cout << "\tPassword Does Not Match!" << endl
+				<< "\tPlease Try Again!" << endl;
+		}
+		else
+			cout << "\n\tYou Entered the Wrong Password!" << endl;
+	} while (true);
+	
+	
 }
 void User::create_Post()
 {
+	string temp;
+	bool post_created = false;
+	cout << "\n\tLet's create a Post!" << endl
+		<< "\n\tEnter content of the Post and press Enter to Create: \n" << endl
+		<< "\n\tPost: ";
+	getline(cin, temp, '\n');
+	for (int i = 0; i < max_posts; i++)
+	{
+		if (posts[i].display().empty())
+		{
+			if (posts[i].make_post(temp))
+			{
+				cout << "\n\tPost Created Successfully!\n\t";
+				post_created = true;
+				break;
+			}
+		}
+		else
+			post_created = false;
+	}
+	if(!post_created)
+		cout << "\n\tPost Creation UnSuccessfull!\n\t";
+	system("pause");
 }
 
 void User::display_Posts()
 {
-}
-
-void User::sign_out()
-{
-
+	bool post_created = false;
+	for (int i = 0; i < max_posts; i++)
+		if (!(posts[i].display().empty()))
+			post_created = true;
+	if (post_created)
+	{
+		cout << "\n\tYou Created the Following Posts:";
+		for (int i = 0; i < max_posts && !(posts[i].display().empty()); i++)
+			cout << "\n\tPost" << i + 1 << " :" << endl
+			<< "\t\t" << posts[i].display() << "\n\t";
+		cout << "\n\t";
+		system("pause");
+	}
+	else		
+	{
+		cout << "\n\tYou Didn't Created any Post!\n\t";
+		system("pause");
+	}
 }
 
 void User::react_to_Post()

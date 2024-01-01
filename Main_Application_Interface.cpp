@@ -1,7 +1,7 @@
 #include"Main_Application_Interface.h"
 #include"User_Manager.h"
-#include<iostream>
-#include<Windows.h>
+#include<iostream> 
+#include<string>
 #include<conio.h>
 using namespace std;
 //constructor defination
@@ -15,6 +15,9 @@ void Main_Application_Interface::run()
     char choice;//variable for storing the choice of the user
     //create a default user for sign in illustration
     user_manager.create_User("anas", "123456");//creates a user
+    current_user = user_manager.get_User("anas", "123456");//gets the user
+    *current_user = User("anas", "123456", "Muhammad Anas", "01/08/2004", "I am a Student at NUST CEME.");
+    current_user = nullptr;
     //main application loop
     do
     {
@@ -26,7 +29,6 @@ void Main_Application_Interface::run()
         {
             choice = _getch();//input choice
             cout << choice << endl;//display input to the console
-            Sleep(100);//wait to make the input clear to user
             if (choice == '1')
             {
                 sign_In();//call to signin
@@ -81,13 +83,13 @@ void Main_Application_Interface::sign_In()
         system("cls");//clear screen for sign in interface
        cout << "\t*****|Sign-In|*****" << endl
             << "\n\tEnter Your Username: ";
-       cin >> temp_username;//input username
+       getline(cin, temp_username, '\n');
        cout << "\n\tEnter Your Password: ";
-       cin >> temp_password;//input password
+       getline(cin, temp_password, '\n');
        //function to validate user if successfull the user account is retrived and function is ended
        if (user_manager.validate_User(temp_username, temp_password))
        {
-           //retriver useraccount
+           //retrive useraccount
            current_user = user_manager.get_User(temp_username, temp_password);
            return;//end the function
        }
@@ -106,11 +108,11 @@ void Main_Application_Interface::sign_Up()
         cout << "\t*****|Sign-Up|*****" << endl
             << "\n\tLet's create an Account for You!" << endl
             << "\n\tEnter a Username: ";
-        cin >> temp_username;//input username
+        getline(cin, temp_username, '\n');
         cout << "\n\tEnter a Password: ";
-        cin >> temp_password;//input password
+        getline(cin, temp_password, '\n');
         cout << "\n\tConfirm Your Password: ";
-        cin >> c_password;//confirm password
+        getline(cin, c_password, '\n');
         //if password does not matches
         //continue the loop to run the sign-up again
         if (c_password != temp_password)

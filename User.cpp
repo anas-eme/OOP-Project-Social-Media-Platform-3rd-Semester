@@ -217,7 +217,7 @@ void User::display_Posts()
 		//this loop is runned until one of the control statement is reached
 		//i.e max posts are created or there is no space for a new post
 		for (int i = 0; i < max_posts && !(posts[i].display().empty()); i++)
-			cout << "\n\tPost" << i + 1 << " :" << endl
+			cout << "\n\tPost " << i + 1 << " :" << endl
 			<< "\t\t" << posts[i].display() << "\n\t";//statement to display post
 		cout << "\n\t";
 		system("pause");

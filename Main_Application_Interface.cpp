@@ -68,6 +68,7 @@ void Main_Application_Interface::welcome_Screen()
         << "\tGet ready for a vibrant community experience!" << endl
         << "\t************************************************" << endl
         << endl
+        << "\t\t\t\t\tProgrammed by:\n\t\t\t\t\tMuhammad Anas\n"
         << "\tLet's Get Started!" << endl
         << "\tSelect One of the Following:" << endl
         << "\t\tOR" << endl

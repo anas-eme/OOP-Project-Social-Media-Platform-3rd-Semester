@@ -231,5 +231,4 @@ void User::display_Posts()
 }
 User::~User()
 {
-	delete[] posts;
 }

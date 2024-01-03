@@ -52,5 +52,5 @@ User* User_Manager::get_User(string u_name, string password)
 }
 User_Manager::~User_Manager()
 {
-    delete users;//delete the memory at the end of the program
+    delete[] users;//delete the memory at the end of the program
 }

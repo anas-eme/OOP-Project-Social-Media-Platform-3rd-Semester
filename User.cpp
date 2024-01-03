@@ -115,9 +115,11 @@ void User::display_Profile()
 }
 void User::update_Profile()
 {
-	char choice;
+	char choice;//for storing the choices made
 	system("cls");
-	cout << "\n\tSelect one of the following:" << endl
+	cout << "\n\tSelect one of the following:"
+		<< "\n\t\tOR" << endl
+		<< "\tPress '0' to GO Back" << endl
 		<< "\tJust Enter the Number!" << endl
 		<< "\n\t1> Change Password" << endl
 		<< "\t2> Change Bio" << endl;
@@ -132,14 +134,16 @@ void User::update_Profile()
 			password = change_Password();//call to change password function
 			break;
 		}
-		else if (choice == '2')
+		else if (choice == '2')//change the bio
 		{
-			cout<<"\n\tEnter New Bio: ";
-			getline(cin,about,'\n');
+			cout << "\n\tEnter New Bio: ";
+			getline(cin, about, '\n');
 			cout << "\n\tBio Updated!\n\t";
 			system("pause");
 			break;
 		}
+		else if (choice == '0')//go back statement
+			return;
 		else
 		{
 			cout<<"\tInvalid Choice!"<<endl;
@@ -153,13 +157,13 @@ string User::change_Password()
 	{
 		cout << "\n\tEnter  Old Password: ";
 		getline(cin, temp1, '\n');
-		if (validate_Password(temp1))
+		if (validate_Password(temp1))//statement to validate the entered old password
 		{
 			cout << "\n\tEnter Your New Password: ";
 			getline(cin, temp1, '\n');
 			cout << "\tEnter Password Again: ";
 			getline(cin, temp2, '\n');
-			if (temp1 == temp2)
+			if (temp1 == temp2)//statement to make sure the new passwords match
 			{
 				cout << "\n\tPassword Updated!\n\t";
 				system("pause");
@@ -169,31 +173,30 @@ string User::change_Password()
 				cout << "\tPassword Does Not Match!" << endl
 				<< "\tPlease Try Again!" << endl;
 		}
-		else
+		else//this statement is run when the user entered the wrong old password
 			cout << "\n\tYou Entered the Wrong Password!" << endl;
 	} while (true);
-	
-	
 }
 void User::create_Post()
 {
 	string temp;
-	bool post_created = false;
+	bool post_created = false;//this vaiable is to make sure the post was successfully created
 	cout << "\n\tLet's create a Post!" << endl
 		<< "\n\tEnter content of the Post and press Enter to Create:" << endl
 		<< "\n\tPost: ";
 	getline(cin, temp, '\n');
-	for (int i = 0; i < max_posts; i++)
+	for (int i = 0; i < max_posts; i++)//itereate through the whole array of posts
 	{
-		if (posts[i].display().empty())
+		if (posts[i].display().empty())//if an empty slot is found the statement is run
 		{
-			if (posts[i].make_post(temp))
+			if (posts[i].make_post(temp))//make_post is called to create post which returns true if and only if the post was successfully created
 			{
 				cout << "\n\tPost Created Successfully!\n\t";
 				post_created = true;
 				break;
 			}
 		}
+		//this case is only when there is no space found in the storage array
 		else
 			post_created = false;
 	}
@@ -201,33 +204,32 @@ void User::create_Post()
 		cout << "\n\tPost Creation UnSuccessfull!\n\t";
 	system("pause");
 }
-
 void User::display_Posts()
 {
+	//this variable is again to make sure atleast one post exists
 	bool post_created = false;
 	for (int i = 0; i < max_posts; i++)
-		if (!(posts[i].display().empty()))
+		if (!(posts[i].display().empty()))//if one post is found post_created will be set to true
 			post_created = true;
 	if (post_created)
 	{
 		cout << "\n\tYou Created the Following Posts:" << endl;
+		//this loop is runned until one of the control statement is reached
+		//i.e max posts are created or there is no space for a new post
 		for (int i = 0; i < max_posts && !(posts[i].display().empty()); i++)
 			cout << "\n\tPost" << i + 1 << " :" << endl
-			<< "\t\t" << posts[i].display() << "\n\t";
+			<< "\t\t" << posts[i].display() << "\n\t";//statement to display post
 		cout << "\n\t";
 		system("pause");
 	}
+	//else the default case for no post created
 	else		
 	{
 		cout << "\n\tYou Didn't Created any Post!\n\t";
 		system("pause");
 	}
 }
-
-void User::react_to_Post()
-{
-}
-
 User::~User()
 {
+	delete[] posts;
 }

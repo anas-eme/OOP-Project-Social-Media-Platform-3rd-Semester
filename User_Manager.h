@@ -1,7 +1,7 @@
 #pragma once
 #include"User.h"
 #include<iostream>
-#define max_users 2 //this sets the maximum users to be allowed to create account
+#define max_users 5 //this sets the maximum users to be allowed to create account
 using namespace std;
 //class for handling the users
 class User_Manager

@@ -1,7 +1,7 @@
 #pragma once
 #include"Post.h"
 #include<iostream>
-#define max_posts 5
+#define max_posts 5 //Max allowed posts per user
 using namespace std;
 //class for the user details
 class User
@@ -29,6 +29,5 @@ public:
 	string change_Password();//change the password
 	void create_Post();//handle creation of a post
 	void display_Posts();//display the posts created by user
-	void react_to_Post();//handle the likes and comments
 	~User();//destructor
 };

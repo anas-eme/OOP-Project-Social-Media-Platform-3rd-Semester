@@ -4,15 +4,15 @@ Post::Post()
 {
 	
 }
-bool Post::make_post(string c)
+bool Post::make_post(string c)//return true only if the post creation was successfull
 {
 	content = c;
-	if (!content.empty())
+	if (!content.empty())//statement to check whether the content is empty or not
 		return true;
 	else
 		return false;
 }
-string Post::display()
+string Post::display()//just returns the post
 {
 	return content;
 }
